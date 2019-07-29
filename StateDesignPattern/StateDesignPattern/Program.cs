@@ -9,7 +9,6 @@ namespace StateDesignPattern
         static void Main(string[] args)
         {
             Program program = new Program();
-            Console.WriteLine("Hello World!");
             gate = new GateExample.Gate();
 
 
@@ -25,7 +24,7 @@ namespace StateDesignPattern
             string key;
             while ((key = Console.ReadKey().KeyChar.ToString()) != "7")
             {
-                Console.WriteLine("key  = " + key);
+                Console.WriteLine();
                 int keyValue;
                 int.TryParse(key, out keyValue);
 
@@ -36,7 +35,6 @@ namespace StateDesignPattern
 
         private static void ProcessInput(int keyValue)
         {
-            Console.WriteLine("Found Key value : " + keyValue);
             switch (keyValue)
             {
                 case 1:
