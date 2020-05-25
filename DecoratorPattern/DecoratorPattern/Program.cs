@@ -13,7 +13,7 @@ namespace DecoratorPattern
             //string key;
             //while ((key = Console.ReadKey().KeyChar.ToString()) != "7")
             {
-                PizzaDecorator.Pizza pizza = new Mozzarella(new Chease(new TommatoSos(new Chease(new Pizza()))));
+                PizzaDecorator.IPizza pizza = new Mozzarella(new Chease(new TommatoSos(new Chease(new Pizza()))));
                 
                 Console.WriteLine(pizza.getCost()+" : Cost");
                 Console.WriteLine(pizza.getDiscription()+" : Discription");

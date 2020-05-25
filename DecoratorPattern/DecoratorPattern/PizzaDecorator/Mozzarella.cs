@@ -6,7 +6,7 @@ namespace DecoratorPattern.PizzaDecorator
     {
         public override float getCost()
         {
-            return getCost() + decoCost;
+            return base.getCost() + decoCost;
         }
 
         public override string getDiscription()
