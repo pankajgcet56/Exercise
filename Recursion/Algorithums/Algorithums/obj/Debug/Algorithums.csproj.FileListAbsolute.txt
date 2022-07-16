@@ -1,0 +1,6 @@
+/Users/payadav/Perforce/Exercise/Recursion/Algorithums/Algorithums/bin/Debug/Algorithums.exe
+/Users/payadav/Perforce/Exercise/Recursion/Algorithums/Algorithums/bin/Debug/Algorithums.pdb
+/Users/payadav/Perforce/Exercise/Recursion/Algorithums/Algorithums/obj/Debug/Algorithums.csproj.AssemblyReference.cache
+/Users/payadav/Perforce/Exercise/Recursion/Algorithums/Algorithums/obj/Debug/Algorithums.csproj.CoreCompileInputs.cache
+/Users/payadav/Perforce/Exercise/Recursion/Algorithums/Algorithums/obj/Debug/Algorithums.exe
+/Users/payadav/Perforce/Exercise/Recursion/Algorithums/Algorithums/obj/Debug/Algorithums.pdb
