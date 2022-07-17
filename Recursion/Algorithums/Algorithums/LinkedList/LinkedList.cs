@@ -124,7 +124,7 @@ namespace Algorithums.LinkedList
         }
 
         /// <summary>
-        /// is List Connected inside <This Is Not Tested>
+        /// is List Connected inside <This Is Not tested>
         /// </summary>
         /// <param name="head"></param>
         /// <returns></returns>
@@ -148,6 +148,23 @@ namespace Algorithums.LinkedList
             }
             
             return true;
+        }
+
+        public static void ReverseLinkedList(LinkedList<T> linkedList)
+        {
+            Node curent = linkedList.HeadNode;
+            Node previous = null;
+            Node next = null;
+
+            while (curent != null)
+            {
+                next = curent.Next;
+                curent.Next = previous;
+                previous = curent;
+                curent = next;
+            }
+
+            linkedList.HeadNode = previous;
         }
         
         public IEnumerator<T> GetEnumerator()

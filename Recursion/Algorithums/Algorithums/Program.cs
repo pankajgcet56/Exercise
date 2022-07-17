@@ -20,6 +20,8 @@ namespace Algorithums
                 list.Print();
             }
             Console.WriteLine("3rd Node from last = "+list.FindNodeFromEndInSingleTraverse(5).Data+". List lenth = "+list.Length());
+            LinkedList.LinkedList<int>.ReverseLinkedList(list);
+            list.Print();
         }
     }
 }
