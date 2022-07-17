@@ -1,4 +1,5 @@
-﻿using Algorithums.Recursion;
+﻿using Algorithums.CircularList;
+using Algorithums.Recursion;
 
 namespace Algorithums
 {
@@ -6,7 +7,15 @@ namespace Algorithums
     {
         public static void Main(string[] args)
         {
-            TowerOfHanoi.TowerOfHanoiExecute(3,'A','B','C');
+            //TowerOfHanoi.TowerOfHanoiExecute(5,'A','B','C');
+            int[] dataInCircularList = new[] {1, 2, 3, 4, 5, 6};
+
+            GenericCircularList<int> circularList = new GenericCircularList<int>();
+            foreach (var data in dataInCircularList)
+            {
+                circularList.InsertNode(data);
+                circularList.Print();
+            }
         }
     }
 }
