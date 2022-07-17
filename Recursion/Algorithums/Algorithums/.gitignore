@@ -27,7 +27,7 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
+*/[Bb]in/*
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
@@ -342,7 +342,7 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
-
+*.exe
 # OpenCover UI analysis results
 OpenCover/
 

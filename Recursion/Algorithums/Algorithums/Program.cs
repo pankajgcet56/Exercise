@@ -1,4 +1,6 @@
-﻿using Algorithums.CircularList;
+﻿using System;
+using Algorithums.CircularList;
+using Algorithums.LinkedList;
 using Algorithums.Recursion;
 
 namespace Algorithums
@@ -8,14 +10,16 @@ namespace Algorithums
         public static void Main(string[] args)
         {
             //TowerOfHanoi.TowerOfHanoiExecute(5,'A','B','C');
-            int[] dataInCircularList = new[] {1, 2, 3, 4, 5, 6};
+            int[] dataInCircularList = new[] {1, 2, 3, 4, 5, 6,7,8,9,10};
 
-            GenericCircularList<int> circularList = new GenericCircularList<int>();
+            LinkedList<int> list = new LinkedList<int>();
             foreach (var data in dataInCircularList)
             {
-                circularList.InsertNode(data);
-                circularList.Print();
+                Console.WriteLine("Inserting Node : "+data);
+                list.InsertNode(data);
+                list.Print();
             }
+            Console.WriteLine("3rd Node from last = "+list.FindNodeFromEndInSingleTraverse(5).Data+". List lenth = "+list.Length());
         }
     }
 }
