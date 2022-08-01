@@ -9,6 +9,38 @@ namespace O9Test
         private static Inventory inventory ;
         public static void Main(string[] args)
         {
+            InventoryProblemTreeSolution problemTreeSolution = new InventoryProblemTreeSolution();
+            //problemTreeSolution.InventoryTree.ReadTree();
+            InventoryProblemTreeSolution.IsDebugMode = false;
+            problemTreeSolution.AddSupply(2,50);
+            
+            problemTreeSolution.InventoryTree.ReadTree();
+            problemTreeSolution.AddDemand(3,25);
+            
+            problemTreeSolution.AddSupply(6,10);
+            problemTreeSolution.InventoryTree.ReadTree();
+            
+            problemTreeSolution.AddDemand(2,30);
+            problemTreeSolution.InventoryTree.ReadTree();
+            
+            Console.WriteLine("0 --> "+problemTreeSolution.GenInventory(0));
+            Console.WriteLine("1 --> "+problemTreeSolution.GenInventory(1));
+            Console.WriteLine("2 --> "+problemTreeSolution.GenInventory(2));
+            Console.WriteLine("3 --> "+problemTreeSolution.GenInventory(3));
+            Console.WriteLine("4 --> "+problemTreeSolution.GenInventory(4));
+            // problemTreeSolution.InventoryTree.ReadTree();
+            Console.WriteLine("5 --> "+problemTreeSolution.GenInventory(5));
+            Console.WriteLine("6 --> "+problemTreeSolution.GenInventory(6));
+            Console.WriteLine("7 --> "+problemTreeSolution.GenInventory(7));
+            Console.WriteLine("8 --> "+problemTreeSolution.GenInventory(8));
+            Console.WriteLine("9 --> "+problemTreeSolution.GenInventory(9));
+            Console.WriteLine("10 --> "+problemTreeSolution.GenInventory(10));
+            Console.WriteLine("11 --> "+problemTreeSolution.GenInventory(11));
+            Console.WriteLine("12 --> "+problemTreeSolution.GenInventory(12));
+        }
+
+        private static void Solution1()
+        {
             inventory = new Inventory(size);
             while (true)
             {
@@ -25,25 +57,35 @@ namespace O9Test
             int randomIndex = (random.Next(0, 70000))%(size);
             
             int randomDelta = random.Next(0, 20);
-            switch (nextRand%3)
+            if (randomDelta < 0)
+            {
+                Console.WriteLine("");
+            }
+            switch (nextRand%4)
             {
                 case 0:
                     // Read Node at Random Index
-                    Console.WriteLine("==============================READ================================");
-                    Console.WriteLine(" Inventory =  "+inventory.GetInventory(randomIndex));
-                    Console.WriteLine("==============================================================");
-                    break;
+                    // Console.WriteLine("==============================READ================================");
+                    // Console.WriteLine(" Inventory =  "+inventory.GetInventory(randomIndex));
+                    // Console.WriteLine("==============================================================");
+                    return;
                 case 1:
-                    Console.WriteLine("==============================Add Demand================================");
+                    Console.WriteLine("==============================Add Demand ({0},{1}) ================================",randomIndex,randomDelta);
                     inventory.AddDemand(randomIndex,randomDelta).Print();
                     Console.WriteLine("==============================================================");
                     break;
                 case 2:
-                    Console.WriteLine("==============================ADD SUPPLY================================");
+                    Console.WriteLine("==============================ADD SUPPLY  ({0},{1}) ================================",randomIndex,randomDelta);
                     inventory.AddSupply(randomIndex,randomDelta).Print();
                     Console.WriteLine("==============================================================");
                     break;
             }
+            Console.WriteLine("==============================Print Invenory================================");
+            foreach (var node in inventory._inventoryNodes)
+            {
+                node.Print();
+            }
+            Console.WriteLine("==============================================================");
         }
     }
 }

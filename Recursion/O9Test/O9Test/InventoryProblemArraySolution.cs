@@ -3,22 +3,9 @@ using System.Collections.Generic;
 
 namespace O9Test
 {
-    public class InventoryNode
-    {
-        public int BucketId;
-        public float Supply;
-        public float Demand;
-        public float Inventory;
-        public void Print()
-        {
-            Console.WriteLine("--------------------No : {0}--------------------",BucketId);
-            Console.WriteLine("Supply : {0}\nDemand : {1}\nInventory : {2}",Supply,Demand,Inventory);
-            Console.WriteLine("----------------------------------------");
-        }
-    }
     public class Inventory
     {
-        private List<InventoryNode> _inventoryNodes;
+        public List<InventoryNode> _inventoryNodes;
         private int _bucketSize = 0;
         public Inventory(int size)
         {
@@ -70,7 +57,7 @@ namespace O9Test
             }
 
             InventoryNode currentNode = _inventoryNodes[bucketId];
-            currentNode.Supply -= delta;
+            currentNode.Demand += delta;
             currentNode.Inventory -= delta; 
             
             for (int i = bucketId+1; i < _bucketSize; i++)
