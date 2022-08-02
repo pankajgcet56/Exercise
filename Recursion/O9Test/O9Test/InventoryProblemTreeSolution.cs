@@ -17,7 +17,7 @@ namespace O9Test
         public void Print()
         {
             Console.WriteLine("--------------------No : {0}--------------------",BucketId);
-            Console.WriteLine("Supply : {0}\nDemand : {1}\nInventory : {2}",Supply,Demand,Inventory);
+            Console.WriteLine("Supply : {0}\nDemand : {1}\nInventory : {2} \nCounter : {3}",Supply,Demand,Inventory,Counter);
             Console.WriteLine("----------------------------------------");
         }
 
@@ -26,8 +26,6 @@ namespace O9Test
             return x.BucketId > y.BucketId;
         }
     }
-
-    
 
     public class InventoryTree
     {
@@ -219,7 +217,7 @@ namespace O9Test
                 return ReadInventoryByTree(node.LeftNode, bucket,lowerNodeUpdated);
             }
         }
-        private void ProcessSupplyDemandByTree(InventoryNode updateNode, InventoryNode node)
+        private void ProcessSupplyDemandByTree(InventoryNode updateNode, InventoryNode node,InventoryNode prevMinNode = null)
         {
             if (node == null)
             {
@@ -229,39 +227,126 @@ namespace O9Test
             if (node.BucketId == updateNode.BucketId)
             {
                 // Found Node
+                if (prevMinNode != null /*&& node.Counter < prevMinNode.Counter*/)
+                {
+                    Console.WriteLine("Found Node {0}, Prev node {1} | Counter PrevNode = {2}, Counter CurrnetNode = {3}",node.BucketId,prevMinNode.BucketId,prevMinNode.Counter,node.Counter);
+                    if (prevMinNode.BucketId < node.BucketId && prevMinNode.Counter>node.Counter && prevMinNode.Counter>0)
+                    {
+                        Console.WriteLine("Updating Inventory for Node : {0}. Inventory Current : {1}, Next {2}",node.BucketId,node.Inventory,prevMinNode.Inventory);
+                        // node.Inventory = prevMinNode.Inventory;
+                    }
+                }
+                Console.WriteLine("---------Update------");
+                node.Print();
+                
                 node.Counter = updateNode.Counter;
                 node.Supply += updateNode.Supply;
                 node.Demand += updateNode.Demand;
+                
                 node.Inventory += updateNode.Supply;
                 node.Inventory -= updateNode.Demand;
+                
+                Console.WriteLine("---------------");
+                node.Print();
+                
             }
             else if(node.BucketId > updateNode.BucketId)
             {
                 // Move left
+                Console.WriteLine("Node : "+node.BucketId+" : Next --> L");
+                // Check if Prv Min has Lower Bucket Index
+                InventoryNode preNode = node.LeftNode;
+                if (prevMinNode != null)
+                {
+                    Console.WriteLine("left : Prev Node={0}, Current = {1}",prevMinNode.BucketId,node.BucketId);
+                }
+                else
+                {
+                    Console.WriteLine("At Node : {0}, Prev Min = Null",node.BucketId);
+                }
+                if (prevMinNode != null && prevMinNode.BucketId < node.BucketId)
+                {
+                    Console.WriteLine("left : Prev Node={0},Current = {1}. Update : From {2} to {3}",prevMinNode.BucketId,node.BucketId,node.Inventory,prevMinNode.Inventory);
+                    node.Inventory = prevMinNode.Inventory;
+                    node.Counter = prevMinNode.Counter;
+                    preNode = prevMinNode;
+                }
+                Console.WriteLine("---------Update------");
+                node.Print();
                 node.Counter = updateNode.Counter;
-                
                 node.Inventory += updateNode.Supply;
                 node.Inventory -= updateNode.Demand;
-                ProcessSupplyDemandByTree(updateNode,node.LeftNode);
+                
+                node.Print();
+                Console.WriteLine("---------------");
+
+                ProcessSupplyDemandByTree(updateNode,node.LeftNode,preNode);
             }
             else
             {
                 // Move right
+                InventoryNode prevMin = null;
+                
+                Console.WriteLine("Node : "+node.BucketId+" : Next --> R");
+                
+                if(prevMinNode == null)
+                {
+                    prevMin = node;
+                    Console.WriteLine("2. Right : Prev Node = {0}. Current Node = {1}",prevMin.BucketId,node.BucketId);
+                }
+                
+                if (prevMinNode != null && prevMinNode.BucketId < node.BucketId)
+                {
+                    prevMin = prevMinNode;
+                    Console.WriteLine("1. Right : Prev Node = {0}. Current Node = {1}",prevMin.BucketId,node.BucketId);
+                }
+                else if(prevMinNode == null)
+                {
+                    prevMin = node;
+                    Console.WriteLine("2. Right : Prev Node = {0}. Current Node = {1}",prevMin.BucketId,node.BucketId);
+                }
+                 
+                if(prevMinNode != null)
+                {
+                    Console.WriteLine("3. Right : Prev Node = {0}. Current Node = {1}",prevMinNode.BucketId,node.BucketId);
+                    prevMin = prevMinNode;
+                }
+
+                if (prevMin != null)
+                {
+                    if (prevMin.Counter > node.Counter)
+                    {
+                        // Update Current Inventory with Prev Min
+                        node.Inventory = prevMin.Inventory;
+                        node.Counter = prevMin.Counter;
+                    }
+                }
                 node.Counter = updateNode.Counter;
                 if (node.RightNode != null && node.Counter>node.RightNode.Counter)
                 {
+                    Console.WriteLine("---------Update------");
+                    node.RightNode.Print();
+                
                     node.RightNode.Inventory = node.RightNode.Supply - node.RightNode.Demand + node.Inventory;
-                    // node.RightNode.Inventory = node.Inventory;
+                    
+                    node.RightNode.Print();
+                    Console.WriteLine("---------------");
                 }
 
                 if (updateNode.BucketId < node.BucketId)
                 {
+                    Console.WriteLine("---------Update------");
+                    node.RightNode.Print();
+                    
                     node.Counter = updateNode.Counter;
                     node.Inventory += updateNode.Supply;
                     node.Inventory -= updateNode.Demand;
+                    
+                    node.RightNode.Print();
+                    Console.WriteLine("---------------");
                 }
                 // No Update for inventory
-                ProcessSupplyDemandByTree(updateNode,node.RightNode);
+                ProcessSupplyDemandByTree(updateNode,node.RightNode,prevMin);
             }
         }
         
