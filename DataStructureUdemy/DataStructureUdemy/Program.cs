@@ -16,7 +16,9 @@ public class Program
         var baseClass = new Problem();
         foreach (var typeVal in types)
         {
-            baseClass = (Problem)Activator.CreateInstance(typeVal)!;
+            var obj = (Problem)Activator.CreateInstance(typeVal)!;
+            if (obj.RunIndex > baseClass.RunIndex)
+                baseClass = obj;
         }
         baseClass?.Run();
     }
@@ -24,6 +26,7 @@ public class Program
 
 public class Problem
 {
+    public float RunIndex = 0;
     public virtual void Run()
     {
         
