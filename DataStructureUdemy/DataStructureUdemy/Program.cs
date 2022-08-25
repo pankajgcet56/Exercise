@@ -8,17 +8,17 @@ public class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        Console.WriteLine("Main Start");
         var type = typeof(Problem);
         var types = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
             .Where(p => type.IsAssignableFrom(p));
+        var baseClass = new Problem();
         foreach (var typeVal in types)
         {
-            var bClass = (Problem)Activator.CreateInstance(typeVal)!;
-            bClass?.Run();
-
+            baseClass = (Problem)Activator.CreateInstance(typeVal)!;
         }
+        baseClass?.Run();
     }
 }
 
@@ -26,6 +26,6 @@ public class Problem
 {
     public virtual void Run()
     {
-        // Console.WriteLine("This is Base Class");
+        
     }
 }
