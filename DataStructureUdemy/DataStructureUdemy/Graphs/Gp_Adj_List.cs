@@ -6,21 +6,22 @@ public class Gp_Adj_List : Problem
 {
     public Gp_Adj_List()
     {
-        this.RunIndex = 4.0f;
+        this.RunIndex = 4.3f;
     }
     public override void Run()
     {
         Console.WriteLine(".........Graph");
-        Graph g = new Graph(6);
+        Graph g = new Graph(7);
         g.AddEdge(0,1);
-        g.AddEdge(0,4);
-        g.AddEdge(2,1);
-        g.AddEdge(3,4);
-        g.AddEdge(4,5);
+        g.AddEdge(1,2);
         g.AddEdge(2,3);
-        g.AddEdge(2,4);
         g.AddEdge(3,5);
-        g.PrintAdjList();
+        g.AddEdge(5,6);
+        g.AddEdge(4,5);
+        g.AddEdge(0,4);
+        g.AddEdge(3,4);
+        // g.PrintAdjList();
+        g.Bfs(1);
     }
 }
 
@@ -64,5 +65,26 @@ public class Graph
             Console.WriteLine();
         }
     }
-    
+
+    public void Bfs(int source)
+    {
+        HashSet<int> traversedNodes = new HashSet<int>();
+        Queue<int> queue = new Queue<int>();
+        queue.Enqueue(source);
+        while (queue.Count>0)
+        {
+            int currentval = queue.Dequeue();
+
+            if (!traversedNodes.Contains(currentval))
+            {
+                traversedNodes.Add(currentval);
+                Console.Write(currentval+", ");
+            }
+            foreach (var nd in GraphAdjList[currentval])
+            {
+                if(!traversedNodes.Contains(nd))
+                    queue.Enqueue(nd);
+            }
+        }
+    }
 }
