@@ -21,7 +21,8 @@ public class Gp_Adj_List : Problem
         g.AddEdge(0,4);
         g.AddEdge(3,4);
         // g.PrintAdjList();
-        g.Bfs(1);
+        // g.Bfs(1);
+        g.Dfs(1);
     }
 }
 
@@ -106,5 +107,25 @@ public class Graph
         {
             Console.WriteLine("{0}-->{1} Distance = {2}",source,i,dist[i]);
         }
+    }
+
+    private void DfsHelper(int node,ref bool[] visitedNodes)
+    {
+        visitedNodes[node] = true;
+        Console.WriteLine("DFS: "+node);
+        //Make visited call for all ets neighber
+        foreach (var nbr in GraphAdjList[node])
+        {
+            if (!visitedNodes[nbr])
+            {
+                DfsHelper(nbr,ref visitedNodes);
+            }
+        }
+        return;
+    }
+    public void Dfs(int source)
+    {
+        bool[] visitedNodes = new bool[Vertices];
+        DfsHelper(source,ref visitedNodes);
     }
 }
