@@ -68,23 +68,43 @@ public class Graph
 
     public void Bfs(int source)
     {
-        HashSet<int> traversedNodes = new HashSet<int>();
+        bool[] traversedNodesArray = new bool[Vertices];
+        
         Queue<int> queue = new Queue<int>();
+        
+        int[] dist = new int[Vertices];
+        int[] parent = new int[Vertices];
+        for (int i = 0; i < Vertices; i++)
+        {
+            parent[i] = -1;
+        }
+        dist[source] = 0;
+
+        parent[source] = source;
         queue.Enqueue(source);
+        traversedNodesArray[source] = true;
+        Console.Write(source+", ");
         while (queue.Count>0)
         {
             int currentval = queue.Dequeue();
-
-            if (!traversedNodes.Contains(currentval))
-            {
-                traversedNodes.Add(currentval);
-                Console.Write(currentval+", ");
-            }
+            
             foreach (var nd in GraphAdjList[currentval])
-            {
-                if(!traversedNodes.Contains(nd))
+            {   
+                if (!traversedNodesArray[nd])
+                {
+                    Console.Write(nd+", ");
                     queue.Enqueue(nd);
+                    parent[nd] = currentval;
+                    dist[nd] = dist[currentval] + 1;
+                }
+                traversedNodesArray[nd] = true;
             }
+        }
+        Console.WriteLine();
+        Console.WriteLine("-------Disntanc-------");
+        for (int i = 0; i < Vertices; i++)
+        {
+            Console.WriteLine("{0}-->{1} Distance = {2}",source,i,dist[i]);
         }
     }
 }
