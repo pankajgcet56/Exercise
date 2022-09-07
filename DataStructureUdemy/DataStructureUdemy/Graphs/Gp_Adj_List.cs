@@ -12,17 +12,25 @@ public class Gp_Adj_List : Problem
     {
         Console.WriteLine(".........Graph");
         Graph g = new Graph(7);
-        g.AddEdge(0,1);
-        g.AddEdge(1,2);
-        g.AddEdge(2,3);
-        g.AddEdge(3,5);
-        g.AddEdge(5,6);
-        g.AddEdge(4,5);
-        g.AddEdge(0,4);
-        g.AddEdge(3,4);
-        // g.PrintAdjList();
+        // g.AddEdge(0,1);
+        // g.AddEdge(1,2);
+        // g.AddEdge(2,3);
+        // g.AddEdge(3,5);
+        // g.AddEdge(5,6);
+        // g.AddEdge(4,5);
+        // g.AddEdge(0,4);
+        // g.AddEdge(3,4);
+        // // g.PrintAdjList();
         // g.Bfs(1);
-        g.Dfs(1);
+        // g.Dfs(1);
+        g.AddEdge(0,1,false);
+        g.AddEdge(1,2,false);
+        g.AddEdge(2,3,false);
+        g.AddEdge(3,0,false);
+        g.AddEdge(0,4,false);
+        g.AddEdge(0,5,false);
+        g.AddEdge(4,5,false);
+        g.Cycle_In_DirectedGraph(1);
     }
 }
 
@@ -127,5 +135,34 @@ public class Graph
     {
         bool[] visitedNodes = new bool[Vertices];
         DfsHelper(source,ref visitedNodes);
+    }
+
+    private void DirectedGraphCycleHelper(int node, ref bool[] visited,ref bool[] stackedNodes, ref int cycleCount)
+    {
+        visited[node] = true;
+        foreach (var n in GraphAdjList[node])
+        {
+            if (!visited[n])
+            {
+                stackedNodes[n] = true;
+                DirectedGraphCycleHelper(n, ref visited, ref stackedNodes, ref cycleCount);
+            }
+            else if(stackedNodes[n])
+            {
+                cycleCount++;
+                Console.WriteLine("Cycle Found : "+string.Join(',',stackedNodes.Select((nd)=>nd.ToString())));
+            }
+        }
+        stackedNodes[node] = false;
+    }
+    public bool Cycle_In_DirectedGraph(int startPoint)
+    {
+        bool[] visitedNodes = new bool[Vertices]; // Stores All Visited Nodes
+        bool[] nodesInStack = new bool[Vertices]; // Stores and Update Node Status in Call Stack
+        int cycle = 0;
+        nodesInStack[startPoint] = true;
+        DirectedGraphCycleHelper(startPoint,ref visitedNodes,ref nodesInStack,ref cycle);
+        Console.WriteLine("Cycle : "+cycle);
+        return false;
     }
 }
