@@ -23,9 +23,9 @@ public class CoinChangeProblem : Problem
             return 0;
         int currentMin = int.MaxValue;
 
-        if (dp[M] != 0)
-            return dp[M];
-        Console.WriteLine("Call For  :: Target : "+M);
+        // if (dp[M] != 0)
+        //     return dp[M];
+        // Console.WriteLine("Call For  :: Target : "+M);
         for (int i = 0; i < coins.Length; i++)
         {
             if (M - coins[i] > 0)
