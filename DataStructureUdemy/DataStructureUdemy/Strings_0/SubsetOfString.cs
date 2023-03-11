@@ -4,7 +4,7 @@ public class SubsetOfString : Problem
 {
     public SubsetOfString()
     {
-        this.RunIndex = float.MaxValue;
+        // this.RunIndex = float.MaxValue;
     }
 
     public override void Run()

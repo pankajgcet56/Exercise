@@ -4,7 +4,7 @@ public class MergeSortProblem : Problem
 {
     public MergeSortProblem()
     {
-        this.RunIndex = 6.1f;
+        this.RunIndex = 2.1f;
     }
     public override void Run()
     {

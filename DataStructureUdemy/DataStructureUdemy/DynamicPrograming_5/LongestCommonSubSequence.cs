@@ -9,7 +9,7 @@ public class LongestCommonSubSequence : Problem
 
     public override void Run()
     {
-        Console.WriteLine("LongestCommonSubSequence .... ");
+        Console.WriteLine("LongestCommonSubSequence .... Dynamic Programming");
         string s1 = "ABCD";
         string s2 = "ABEDG";
         int n1 = s1.Length;

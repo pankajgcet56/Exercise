@@ -4,7 +4,7 @@ public class SmallestString : Problem
 {
     public SmallestString()
     {
-        this.RunIndex = 6.2f;
+        this.RunIndex = 2.2f;
     }
 
     public override void Run()
