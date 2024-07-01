@@ -15,7 +15,7 @@ namespace Algorithms.Recursion
             
             TowerOfHanoiExecute(n-1,fromPage,auxPage,toPage);
             Console.WriteLine("Moving Disk {0}, from {1} to {2}",n,fromPage,toPage);
-            TowerOfHanoiExecute(n-1,auxPage,toPage,fromPage);
+            TowerOfHanoiExecute(n-1,auxPage,toPage,fromPage); 
         }
     }
 }
