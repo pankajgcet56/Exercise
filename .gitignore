@@ -409,4 +409,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-.DS_Store
+**/.DS_Store
+
+# Practice Ground
+PracticeGround/.idea/*
+TestApp1/.idea/*
