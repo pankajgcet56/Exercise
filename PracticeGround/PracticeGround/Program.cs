@@ -5,13 +5,34 @@ namespace PracticeGround;
 
 public class Program
 {
+
+    public static int[] Solution1(int input1, int input2)
+    {
+        // input1 : N canddee
+        // input2 : k Student;
+        // List<int> toffeesData = new List<int>(input2);
+        int[] toffeesData = new int[input1];
+        int remainingCandee = input1;
+        int indexCandee = 1;
+        while (remainingCandee>0)
+        {
+            Console.WriteLine((indexCandee % input2)+" = "+toffeesData[indexCandee % input2]);
+            toffeesData[indexCandee % input2] += indexCandee;
+            Console.WriteLine((indexCandee % input2)+" = "+toffeesData[indexCandee % input2]);
+            remainingCandee -= indexCandee;
+            indexCandee++;
+        }
+        
+        return toffeesData;
+    }
+
     public static void Main()
     {
         string sourceDirectory = GetSolutionDirectory();
-
+        
         Type interfaceType = typeof(ILeetCodeSolotion);
         var latestModifiedClass = GetLatestModifiedClassImplementingInterface(interfaceType, sourceDirectory);
-
+        
         if (latestModifiedClass != null)
         {
             Console.WriteLine($"Running File: {latestModifiedClass.Name}.cs");
