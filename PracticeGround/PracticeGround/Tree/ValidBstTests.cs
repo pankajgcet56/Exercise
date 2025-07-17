@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace PracticeGround.Tree.Tests;
+namespace PracticeGround.Tree;
 
 public class ValidBstTests
 {
