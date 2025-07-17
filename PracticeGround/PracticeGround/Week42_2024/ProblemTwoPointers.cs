@@ -1,4 +1,4 @@
-namespace PracticeGround.Week40_2024;
+namespace PracticeGround.Week42_2024;
 
 public class ProblemTwoPointers : ILeetCodeSolotion
 {

@@ -26,7 +26,7 @@ public class Program
         return toffeesData;
     }
 
-    public static void Main()
+    public static void MainOld()
     {
         string sourceDirectory = GetSolutionDirectory();
         
