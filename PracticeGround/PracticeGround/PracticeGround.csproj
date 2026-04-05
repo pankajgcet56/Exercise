@@ -16,9 +16,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Grapth\" />
       <Folder Include="Week29_2025\" />
     </ItemGroup>
-
     <ItemGroup>
         <PackageReference Include="xunit" Version="2.4.2" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
